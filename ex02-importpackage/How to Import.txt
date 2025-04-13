@@ -1,0 +1,7 @@
+go mod init <your_module_name>
+go get <package_name>
+
+go run <your_module_name>.go #  Compile and run the program
+go build <your_module_name>.go # Compile the program (go build <app>.go -> <app.exe> -> CMD[app.exe])
+
+
