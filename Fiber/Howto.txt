@@ -1,0 +1,16 @@
+go mod init myapp
+
+# Web framework
+go get github.com/gofiber/fiber/v2
+
+# โหลด .env
+go get github.com/joho/godotenv
+
+# Bcrypt สำหรับเข้ารหัสรหัสผ่าน
+go get golang.org/x/crypto/bcrypt
+
+# SQL driver (เช่น MySQL)
+go get github.com/go-sql-driver/mysql
+
+# หรือใช้ PostgreSQL แทน
+# go get github.com/lib/pq

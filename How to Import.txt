@@ -1,0 +1,11 @@
+# How to Import
+# Importing a package in Go is done using the `import` statement.
+go mod init myapp
+
+#  Compile and run the program
+go run <your_module_name>.go 
+
+# Compile the program (go build <app>.go -> <app.exe> -> CMD[app.exe])
+go build <your_module_name>.go 
+
+

@@ -3,14 +3,10 @@ package main
 import "fmt"
 
 func main() {
-	for i := 0; i < 10; i++ {
-		fmt.Println(i)
-	}
+	for i := 0; i < 1000000000; i++ {
+		if i%100000 == 0 {
+			fmt.Println(i)}
 
-	for i := 0; i < 10; i++ {
-		if i == 5 {
-			continue
-		}
-		fmt.Println(i)
-	}
+}
+fmt.Println(`Done`)
 }
