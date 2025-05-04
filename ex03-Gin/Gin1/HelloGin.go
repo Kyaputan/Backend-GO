@@ -19,7 +19,7 @@ func main() {
 
 	router := gin.Default()
 
-	// Define a simple GET endpoint
+
 	router.GET("/", func(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"message": s3Bucket})
 	})
