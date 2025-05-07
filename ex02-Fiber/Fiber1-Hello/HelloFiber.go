@@ -19,6 +19,7 @@ func main() {
 	}
 
 	HELLO := os.Getenv("HELLO")
+	PORT := os.Getenv("PORT")
 
 	app := fiber.New()
 
@@ -35,8 +36,14 @@ func main() {
 	})
 
 	app.Get("/", func(c *fiber.Ctx) error {
-		return c.JSON(fiber.Map{"message": HELLO})
+		return c.JSON(fiber.Map{
+			"message": HELLO,
+			"status":  "success",
+		})
 	})
 
-	log.Fatal(app.Listen(":5000"))
+	if err := app.Listen(":" + PORT); err != nil {
+		log.Fatalf("❌ Failed to start server: %v", err)
+	}
+
 }
