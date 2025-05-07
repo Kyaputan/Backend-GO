@@ -69,7 +69,7 @@ func main() {
 				"status":  "success",
 				"AllData": map[string]interface{}{
 					"json": json,
-					"name": name,
+					"Name": name,
 				},
 			})
 		}
