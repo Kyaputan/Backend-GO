@@ -22,7 +22,6 @@ func main() {
 	PORT := os.Getenv("PORT")
 
 	app := fiber.New()
-
 	app.Use(cors.New())
 
 	app.Use(func(c *fiber.Ctx) error {
