@@ -2,9 +2,11 @@ package main
 
 import (
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/joho/godotenv"
 )
 
@@ -16,13 +18,25 @@ func main() {
 		return
 	}
 
-	Hello := os.Getenv("HELLO")
+	HELLO := os.Getenv("HELLO")
 
 	app := fiber.New()
 
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString(Hello)
+	app.Use(cors.New())
+
+	app.Use(func(c *fiber.Ctx) error {
+		if c.Path() == "/" {
+			return c.Next()
+		}
+		if c.Is("json") {
+			return c.Next()
+		}
+		return c.SendString("Only JSON allowed!")
 	})
 
-	app.Listen(":5000")
+	app.Get("/", func(c *fiber.Ctx) error {
+		return c.JSON(fiber.Map{"message": HELLO})
+	})
+
+	log.Fatal(app.Listen(":5000"))
 }
