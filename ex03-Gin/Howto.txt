@@ -1,4 +1,4 @@
-go mod init myapp
+go mod init github.com/Kyaputan/Backend-GO/ex03-Gin/Gin#
 
 # Web framework
 go get github.com/gin-gonic/gin
