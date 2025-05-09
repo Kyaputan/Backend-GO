@@ -50,34 +50,38 @@ func main() {
 	// Route: POST /post/:name?
 	// รับข้อมูล JSON จาก client และส่งกลับพร้อมชื่อ (ถ้ามี)
 	// ----------------------------
+	type RequestBody struct {
+		Email string `json:"email"`
+		Age   int    `json:"age"`
+	}
 	app.Post("/post/:name?", func(c *fiber.Ctx) error {
-		var json map[string]interface{}
+		var json RequestBody
+		name := c.Params("name")
 
 		// แปลง body ที่รับมาเป็น JSON
 		if err := c.BodyParser(&json); err != nil {
 			fmt.Println("❌ Error parsing JSON at /post/:name?")
-			return c.JSON(fiber.Map{
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
 				"message": "❌ Failed to bind JSON",
 				"status":  "error",
 			})
 		}
 
-		name := c.Params("name")
 		if name != "" {
-			return c.JSON(fiber.Map{
+			return c.Status(fiber.StatusOK).JSON(fiber.Map{
 				"message": "✅ JSON received successfully!",
 				"status":  "success",
-				"AllData": map[string]interface{}{
+				"data": map[string]any{
 					"json": json,
 					"Name": name,
 				},
 			})
 		}
 
-		return c.JSON(fiber.Map{
+		return c.Status(fiber.StatusOK).JSON(fiber.Map{
 			"message": "✅ JSON received successfully!",
 			"status":  "success",
-			"AllData": json,
+			"data":    json,
 		})
 	})
 
