@@ -11,9 +11,7 @@ import (
 
 func main() {
 
-	// เชื่อมต่อกับฐานข้อมูล
 	database.Connect()
-	// ทำให้การปิดการเชื่อมต่อเกิดขึ้นเมื่อ main() จบ
 	defer database.Close()
 
 	fmt.Println(config.GetDatabaseURL())

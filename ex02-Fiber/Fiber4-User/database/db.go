@@ -3,7 +3,7 @@ package database
 import (
 	"log"
 
-	"github.com/Kyaputan/Backend-GO/ex02-Fiber/Fiber3-ORM/config"
+	"github.com/Kyaputan/Backend-GO/ex02-Fiber/Fiber4-User/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -12,22 +12,21 @@ import (
 var DB *gorm.DB
 
 // ฟังก์ชันการเชื่อมต่อฐานข้อมูล
-func Connect() (*gorm.DB, error) {
+func Connect() {
 	conn := config.GetDatabaseURL()
-	db, err := gorm.Open(mysql.Open(conn), &gorm.Config{})
+	var err error
+	DB, err = gorm.Open(mysql.Open(conn), &gorm.Config{})
 	if err != nil {
-		return nil, err
+		log.Fatal("❌ Failed to connect to database:", err)
 	}
-	DB = db
 	log.Println("✅ Connected to MySQL database")
-	return db, nil
 }
 
 // ฟังก์ชันปิดการเชื่อมต่อฐานข้อมูล
-func Close() error {
+func Close() {
 	sqlDB, err := DB.DB()
 	if err != nil {
-		return err
+		log.Fatal("❌ Error closing database:", err)
 	}
-	return sqlDB.Close()
+	sqlDB.Close()
 }
