@@ -18,6 +18,11 @@ type SignupInput struct {
 	Password string `json:"Password"`
 }
 
+type LoginInput struct {
+	Email    string `json:"Email"`
+	Password string `json:"Password"`
+}
+
 func main() {
 
 	database.Connect()
@@ -108,6 +113,46 @@ func main() {
 
 		return c.Status(fiber.StatusCreated).JSON(fiber.Map{
 			"message": "User created successfully",
+			"user": fiber.Map{
+				"ID":    user.ID,
+				"Name":  user.Name,
+				"Email": user.Email,
+			},
+		})
+	})
+
+	app.Post("/users/login", func(c *fiber.Ctx) error {
+		var input LoginInput
+		var user models.User
+
+		if err := c.BodyParser(&input); err != nil {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": "Invalid request body",
+			})
+		}
+
+		if input.Email == "" || input.Password == "" {
+			return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+				"error": "All fields are required",
+			})
+		}
+
+		result := database.DB.Where("email = ?", input.Email).First(&user)
+
+		if result.Error != nil {
+			return c.Status(fiber.StatusNotFound).JSON(fiber.Map{
+				"error": "User not found",
+			})
+		}
+
+		if err := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(input.Password)); err != nil {
+			return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+				"error": "Invalid password",
+			})
+		}
+
+		return c.JSON(fiber.Map{
+			"message": "Login successful",
 			"user": fiber.Map{
 				"ID":    user.ID,
 				"Name":  user.Name,
