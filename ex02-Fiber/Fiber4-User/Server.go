@@ -5,9 +5,9 @@ import (
 	"log"
 	"os"
 
-	"github.com/Kyaputan/Backend-GO/ex02-Fiber/Fiber4-User/config"
-	"github.com/Kyaputan/Backend-GO/ex02-Fiber/Fiber4-User/database"
-	"github.com/Kyaputan/Backend-GO/ex02-Fiber/Fiber4-User/models"
+	"github.com/Kyaputan/Golang/ex02-Fiber/Fiber4-User/config"
+	"github.com/Kyaputan/Golang/ex02-Fiber/Fiber4-User/database"
+	"github.com/Kyaputan/Golang/ex02-Fiber/Fiber4-User/models"
 	"github.com/gofiber/fiber/v2"
 	"golang.org/x/crypto/bcrypt"
 )

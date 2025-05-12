@@ -1,4 +1,4 @@
-go mod init github.com/Kyaputan/Backend-GO/ex02-Fiber/Fiber#
+go mod init github.com/Kyaputan/Golang/ex02-Fiber/Fiber#
 
 # Web framework
 go get github.com/gofiber/fiber/v2

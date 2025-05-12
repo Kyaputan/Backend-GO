@@ -4,9 +4,9 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/Kyaputan/Backend-GO/ex02-Fiber/Fiber3-ORM/config"
-	"github.com/Kyaputan/Backend-GO/ex02-Fiber/Fiber3-ORM/database"
-	"github.com/Kyaputan/Backend-GO/ex02-Fiber/Fiber3-ORM/models"
+	"github.com/Kyaputan/Golang/ex02-Fiber/Fiber3-ORM/config"
+	"github.com/Kyaputan/Golang/ex02-Fiber/Fiber3-ORM/database"
+	"github.com/Kyaputan/Golang/ex02-Fiber/Fiber3-ORM/models"
 )
 
 func main() {

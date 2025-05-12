@@ -1,4 +1,4 @@
-module github.com/Kyaputan/Backend-GO/ex02-Fiber/Fiber4-User
+module github.com/Kyaputan/Golang/ex02-Fiber/Fiber4-User
 
 go 1.24.2
 

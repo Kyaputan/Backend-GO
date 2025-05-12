@@ -3,7 +3,7 @@ package database
 import (
 	"log"
 
-	"github.com/Kyaputan/Backend-GO/ex02-Fiber/Fiber4-User/config"
+	"github.com/Kyaputan/Golang/ex02-Fiber/Fiber4-User/config"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
