@@ -16,11 +16,13 @@ type SignupInput struct {
 	Name     string `json:"Name"`
 	Email    string `json:"Email"`
 	Password string `json:"Password"`
+	Role     string `json:"Role"` // "user" or "admin"
 }
 
 type LoginInput struct {
 	Email    string `json:"Email"`
 	Password string `json:"Password"`
+	Role     string `json:"Role"` // "user" or "admin"
 }
 
 func main() {
@@ -32,6 +34,11 @@ func main() {
 	PORT := os.Getenv("PORT")
 
 	fmt.Println(config.GetDatabaseURL())
+
+	err := database.DB.AutoMigrate(&models.User{}, &models.Products{})
+	if err != nil {
+		log.Fatal("Migration failed:", err)
+	}
 
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.SendString("✅ Server is running! Fiber is ready to go!")
@@ -77,7 +84,7 @@ func main() {
 		})
 	})
 
-	app.Post("/users/singup", func(c *fiber.Ctx) error {
+	app.Post("/users/signup", func(c *fiber.Ctx) error {
 
 		var input SignupInput
 		if err := c.BodyParser(&input); err != nil {
@@ -103,6 +110,7 @@ func main() {
 			Name:     input.Name,
 			Email:    input.Email,
 			Password: string(hashedPassword),
+			Role:     "user",
 		}
 
 		if err := database.DB.Create(&user).Error; err != nil {
@@ -117,6 +125,7 @@ func main() {
 				"ID":    user.ID,
 				"Name":  user.Name,
 				"Email": user.Email,
+				"Role":  user.Role,
 			},
 		})
 	})
@@ -157,6 +166,7 @@ func main() {
 				"ID":    user.ID,
 				"Name":  user.Name,
 				"Email": user.Email,
+				"Role":  user.Role,
 			},
 		})
 	})
